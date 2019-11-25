@@ -4,7 +4,7 @@ function gridT() {
         gridTetris = new Array(15);
         for (var i = 0; i < 15; i++) {
             gridTetris[i] = new Array(10);
-            for (j = 0; j < 10; j++){
+            for (j = 0; j < 10; j++) {
                 gridTetris[i][j] = new singleBlock(0, 0, 0, "empty");
             }
         }
@@ -15,22 +15,22 @@ function gridT() {
         for (var i = 0; i < 15; i++) {
             for (j = 0; j < 10; j++) {
                 if (gridTetris[i][j].color == 0) {
-                    ctx.fillStyle = "grey";
+                    ctx.fillStyle = "black";
                     ctx.fillRect(gridX + 40 * j, gridY + 40 * i, 39, 39);
                 }
-                else if (gridTetris[i][j].color == 1){
+                else if (gridTetris[i][j].color == 1) {
                     ctx.fillStyle = "red";
                     ctx.fillRect(gridX + 40 * j, gridY + 40 * i, 39, 39);
                 }
-                else if (gridTetris[i][j].color == 2){
+                else if (gridTetris[i][j].color == 2) {
                     ctx.fillStyle = "yellow";
                     ctx.fillRect(gridX + 40 * j, gridY + 40 * i, 39, 39);
                 }
-                else if (gridTetris[i][j].color == 3){
+                else if (gridTetris[i][j].color == 3) {
                     ctx.fillStyle = "blue";
                     ctx.fillRect(gridX + 40 * j, gridY + 40 * i, 39, 39);
                 }
-                else if (gridTetris[i][j].color == 4){
+                else if (gridTetris[i][j].color == 4) {
                     ctx.fillStyle = "green";
                     ctx.fillRect(gridX + 40 * j, gridY + 40 * i, 39, 39);
                 }
@@ -40,9 +40,14 @@ function gridT() {
         }
     }
 
-    this.tMove = function(x,y,rot){
-        gridTetris = tGrid.tMaster(x,y,rot,gridTetris);
+    this.tMove = function (x, y, rot) {
+        gridTetris = tGrid.tMaster(x, y, rot, gridTetris, 0);
     }
+
+    this.tRemove = function (x, y, rot) {
+        gridTetris = tGrid.tMaster(x, y, rot, gridTetris, 1);
+    }
+
 
     this.restart(); //passa aqui na primeira vez e dps nunca
 }

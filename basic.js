@@ -17,19 +17,23 @@ var gridY = startPosY;
 //bloco de teste
 var dummyX = startPosX;
 var dummyY = startPosY;
+//
 
 const StartSpeed = 800;
 var speed = 800;
 
+//qual rotação das 4 possíveis
 var rotationMain = 1;
 
-//"respawn" das peças
+//"respawn" das peças / / / / (PX,PY,color,type)
 const blockMaster = new singleBlock(0,4,0,"empty");
+//bloco de referência para as peças
 var blockNow = new singleBlock(0,4,0,"empty"); 
+//
 
 //GRID 15x10
 
-var gTest = new gridT();
+var gridMain = new gridT();
 
 window.onload = function () { //o que será carregado na tela
     
@@ -42,16 +46,19 @@ function game() { //ta mais pra função desenhar mas ok
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, stage.width, stage.height);
 
-    drawBoard();
+    drawBoard(); //desenha grid do Tetris
 
+    /*
     ctx.fillStyle = "red";
     ctx.fillRect(dummyX, dummyY, 39, 39); //não usar número no lugar do startPosX e startPosY
+    */
 
-    pieceOnGrid();
-    gTest.updateGrid();
+    pieceOnGrid(); //peça descendo no grid agora
+
+    gridMain.updateGrid();
 }
 
-function pieceOnGrid(){
+function pieceOnGrid(){ 
     if (blockNow.PY == -1){
         blockNow = blockMaster;
     }
@@ -60,26 +67,28 @@ function pieceOnGrid(){
     //blockNow.rotation?
 
     if (blockNow.type == "t"){
-        gTest.tMove(blockNow.PX,blockNow.PY,1);
-
+        gridMain.tMove(blockNow.PX,blockNow.PY,1);
     }
     //random peças aqui talvez
 
 }
 
 function fall_speed(){
+    gridMain.tRemove(blockNow.PX,blockNow.PY,1);
     blockNow.PX = blockNow.PX + 1;
 }
 
 function keyPush(event){ //implementa a função de cada seta
     switch (event.keyCode) {
         case 37: // Left
+        gridMain.tRemove(blockNow.PX,blockNow.PY,1);
         blockNow.PY = blockNow.PY - 1;
             break;
         case 38: // up
         dummyY = dummyY + 100;
             break;
         case 39: // right
+        gridMain.tRemove(blockNow.PX,blockNow.PY,1);
         blockNow.PY = blockNow.PY + 1;
             break;
         case 40: // down
@@ -90,7 +99,7 @@ function keyPush(event){ //implementa a função de cada seta
     }
 }
 
-function drawBoard() { //desenha grid do Tetris
+function drawBoard() { 
     // Box width
     var bw = 400;
     // Box height
