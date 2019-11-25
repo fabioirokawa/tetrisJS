@@ -1,22 +1,43 @@
 var stage = document.getElementById('stage');
 var ctx = stage.getContext("2d");
 document.addEventListener("keydown", keyPush);
-var level = [5][5] = 0;
 
-var sqrX = 51;
-var sqrY = 51;
+//
+//ctx.fillRect(quantos pixels do eixo x para começar o desenho, idem porém com eixo y,
+//            ,tamanho da largura do bloco, tamanho da altura do bloco)
+//
+
+//posição X e Y inicial para o jogo todo, sujeito a mudança
+const startPosX = 50; 
+const startPosY = 50;
+
+var gridX = startPosX;
+var gridY = startPosY;
+
+//bloco de teste
+var dummyX = startPosX;
+var dummyY = startPosY;
 
 const StartSpeed = 800;
 var speed = 800;
 
-window.onload = function () {
+var rotationMain = 1;
+
+//"respawn" das peças
+const blockMaster = new singleBlock(0,4,0,"empty");
+var blockNow = new singleBlock(0,4,0,"empty"); 
+
+//GRID 15x10
+
+var gTest = new gridT();
+
+window.onload = function () { //o que será carregado na tela
+    
     setInterval(game, 50);
     setInterval(this.fall_speed, speed);
 }
 
-function game() {
-    //sqrX = --sqrX;
-    //sqrY = ++sqrY;
+function game() { //ta mais pra função desenhar mas ok
 
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, stage.width, stage.height);
@@ -24,40 +45,58 @@ function game() {
     drawBoard();
 
     ctx.fillStyle = "red";
-    ctx.fillRect(sqrX, sqrY, 39, 39); //não usar número no lugar do sqrX e sqrY
+    ctx.fillRect(dummyX, dummyY, 39, 39); //não usar número no lugar do startPosX e startPosY
+
+    pieceOnGrid();
+    gTest.updateGrid();
+}
+
+function pieceOnGrid(){
+    if (blockNow.PY == -1){
+        blockNow = blockMaster;
+    }
+
+    blockNow.type = "t";
+    //blockNow.rotation?
+
+    if (blockNow.type == "t"){
+        gTest.tMove(blockNow.PX,blockNow.PY,1);
+
+    }
+    //random peças aqui talvez
 
 }
 
-async function fall_speed(){
-    sqrY = sqrY + 40;
+function fall_speed(){
+    blockNow.PX = blockNow.PX + 1;
 }
 
-function keyPush(event){
+function keyPush(event){ //implementa a função de cada seta
     switch (event.keyCode) {
         case 37: // Left
-            sqrX = sqrX - 40;
+        blockNow.PY = blockNow.PY - 1;
             break;
         case 38: // up
-            sqrY = sqrY + 100;
+        dummyY = dummyY + 100;
             break;
         case 39: // right
-            sqrX = sqrX + 40;
+        blockNow.PY = blockNow.PY + 1;
             break;
         case 40: // down
-            sqrX = --sqrX;
+        dummyX = --dummyX;
             break;			
         default:
             break;
     }
 }
 
-function drawBoard() {
+function drawBoard() { //desenha grid do Tetris
     // Box width
     var bw = 400;
     // Box height
     var bh = 600;
     // Padding
-    var p = 50;
+    var p = 49;
 
     for (var x = 0; x <= bw; x += 40) {
         ctx.moveTo(0.5 + x + p, p);

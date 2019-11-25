@@ -1,0 +1,3 @@
+function linePiece(){
+    this.
+}
