@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Form validation- Register</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='mainReg.js'></script>
+</head>
+
+<body>
+
+    <form onsubmit="return validate()" action="LoginScreen.html">
+        <!--return validate only true-->
+        Username <input id="uname" placeholder="Username" type="text" required/> <br><br>
+
+        Password <input id="pass" placeholder="Password" type="password" required/> <br><br> 
+        
+        Password <input id="pass2" placeholder="Password" type="password" required/> <br><br>
+
+        <button onclick="validate()" type="submit"> Sign in </button>
+
+    </form>
+
+</body>
+
+</html>
