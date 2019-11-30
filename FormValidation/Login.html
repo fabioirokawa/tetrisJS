@@ -6,20 +6,22 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Form validation</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='login.css'>
+    
     <script src='mainLogin.js'></script>
 </head>
 
 <body>
 
-    <form onsubmit="return validate()" action="LoginScreen.html">
-        <!--return validate only true-->
-        Username <input id="uname" placeholder="Username" type="text" required/> <br><br>
-
-        Password <input id="pass" placeholder="Password" type="password" required/> <br><br>
-
-        <button onclick="validate()" type="submit"> Login </button>
-
+    <form onsubmit="return validate()" action="index.html">
+        <div class="main">
+            <p class="sign" align="center">Login</p>
+              <input id = "uname" class="un" type="text" align="center" placeholder="Username">
+              <input id = "pass" class="pass" type="password" align="center" placeholder="Password">
+              <button class= "submit" type="submit"> Login </button>
+              <p class="forgot" align="center"><a href="#">Forgot Password?</p>
+              <p class="forgot" align="center"><a href= "Register.html">Don't have an account? Register</p>
+        </div>
     </form>
 
 </body>
